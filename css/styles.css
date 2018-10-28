@@ -317,9 +317,6 @@ nav h1 a {
   #restaurants-list li {
     max-width: 30%;
   }
-  #restaurants-list p {
-    width: 60%;
-  }  
   #restaurants-list li h1 {
     height: 40px;
   }
