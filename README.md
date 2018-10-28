@@ -1,32 +1,30 @@
-# Mobile Web Specialist Certification Course
----
-#### _Three Stage Course Material Project - Restaurant Reviews_
+# Memory Restaurant Reviews Stage 1 Project
 
-## Project Overview: Stage 1
+## Overview
 
-For the **Restaurant Reviews** projects, you will incrementally convert a static webpage to a mobile-ready web application. In **Stage One**, you will take a static design that lacks accessibility and convert the design to be responsive on different sized displays and accessible for screen reader use. You will also add a service worker to begin the process of creating a seamless offline experience for your users.
+This is a web application that helps you locate or find a resturants that has your desired cuisine. This application is very responsive and accessible to everyone.
 
-### Specification
+## This Repo
 
-You have been provided the code for a restaurant reviews website. The code has a lot of issues. It’s barely usable on a desktop browser, much less a mobile device. It also doesn’t include any standard accessibility features, and it doesn’t work offline at all. Your job is to update the code to resolve these issues while still maintaining the included functionality. 
+This repository has files that allows the effective performance. The project has it's **stylesheet**, **JSON data**, **images** and **javascript** files placed in the **css**, **data**, **images** and **js** folders respectively. The readme, html files and sw.js are not placed in any folder. 
 
-### What do I do from here?
+### Like to Download/Clone this Repo
 
-1. In this folder, start up a simple HTTP server to serve up the site files on your local computer. Python has some simple tools to do this, and you don't even need to know Python. For most people, it's already installed on your computer. 
+To download this repository,
+* click **Clone or Download**.
+* choose most suitable option and there, you have it.
+* In the **main.js** and **resturant_info.jss** can the Map API. You can do this with [Mapbox](https://www.mapbox.com/). Mapbox is free to use, and does not require any payment information.
+* In the terminal, check the version of Python you have: `python -V`. If you have Python 2.x, spin up the server with `python -m SimpleHTTPServer 8000` (or some other port, if port 8000 is already in use.) For Python 3.x, you can use `python3 -m http.server 8000`. If you don't have Python installed, navigate to Python's [website](https://www.python.org/) to download and install the software.
 
-In a terminal, check the version of Python you have: `python -V`. If you have Python 2.x, spin up the server with `python -m SimpleHTTPServer 8000` (or some other port, if port 8000 is already in use.) For Python 3.x, you can use `python3 -m http.server 8000`. If you don't have Python installed, navigate to Python's [website](https://www.python.org/) to download and install the software.
+### How to use downloaded/cloned Repo
 
-2. With your server running, visit the site: `http://localhost:8000`, and look around for a bit to see what the current experience looks like.
-3. Explore the provided code, and start making a plan to implement the required features in three areas: responsive design, accessibility and offline use.
-4. Write code to implement the updates to get this site on its way to being a mobile-ready website.
+```
+Ensure you have [Sublime Text](https://www.sublimetext.com/3) or [Visual studio code](https://code.visualstudio.com/) so you can do good editing and reading of files if you use a windows OS. Get [Atom](https://atom.io/) if you use IOS.
+```
 
-## Leaflet.js and Mapbox:
-
-This repository uses [leafletjs](https://leafletjs.com/) with [Mapbox](https://www.mapbox.com/). You need to replace `<your MAPBOX API KEY HERE>` with a token from [Mapbox](https://www.mapbox.com/). Mapbox is free to use, and does not require any payment information. 
-
-### Note about ES6
-
-Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write. 
-
-
-
+* **index.html** is the HTML file contains the home view displays.
+* **restaurant.html** is the HTML file displays a selected resturant from the home page.
+* **sw.js** is the service worker file which allows you to cache the application and alsomake application functional offline.
+* **style.css** is the one and basic css file and is found in the **css** folder. This file is for styling the HTML - making it responsive across all device.
+* **main.js** is the javascript files and is found in the **js** folder. This file controls the basic functionalities of the application.
+* **Project instruction** contains instruction designed on Udacity for this project. [Udacity](https://www.udacity.com/) is a leading online school that is lovely. You will learn a lot.
