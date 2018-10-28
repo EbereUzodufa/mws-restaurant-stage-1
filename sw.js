@@ -44,13 +44,39 @@ self.addEventListener('activate', function(event) {
 			);
 		})
 	);
-})
+});
 
-self.addEventListener('fetch', function(event) {
-	event.respondWith(
-		caches.put(event.request)
-		.then(function(response) {
-			return response || fetch(event.request);
-		})
-	);
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('mws-restaurant-') &&
+                 cacheName != staticCacheName;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});
+
+
+self.addEventListener('fetch',function(event) {
+  event.respondWith
+  (    
+    caches.match(event.request)
+    .then(function(response) {
+        if (response !== undefined) return; 
+      	fetch(event.request)
+      	.then(function (response) {
+       		let cloneResponse = response.clone();
+            caches.open(staticCacheName)
+            .then(function (cache) {
+                cache.put(event.request, cloneResponse);
+              });
+            return response;
+      	});
+    }) 
+  );
 });
