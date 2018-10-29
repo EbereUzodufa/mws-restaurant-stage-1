@@ -1,9 +1,10 @@
 let staticCacheName = 'restaurant-static-vs1';
 
+//Let cache some files
 self.addEventListener('install', function(event) {
 	event.waitUntil(
 		caches.open(staticCacheName).then(function(cache) {
-			//Files we need offline
+			console.log('Cached: '+ staticCacheName);
 			return cache.addAll([
 				'./',
 				'./index.html',
@@ -29,14 +30,47 @@ self.addEventListener('install', function(event) {
 	);
 });
 
-//Service Worker listen events
+//Fetch Cache
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+
+        if (response) {
+          return response;
+        }
+
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(
+          function(response) {
+          	console.log(response);
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
+    );
+});
+
+//Updating cache
 self.addEventListener('activate', function(event) {
 	event.waitUntil(
 		caches.keys()
 		.then(function(cacheNames) {
 			return Promise.all(
 				cacheNames.filter(function(cacheName) {
-					return cacheName.startsWith('restaurant-') &&
+					return cacheName.startsWith('mws-restaurant-') &&
 						   cacheName != staticCacheName;
 				}).map(function(cacheName) {
 					return caches.delete(cacheName);
@@ -46,21 +80,10 @@ self.addEventListener('activate', function(event) {
 	);
 });
 
-self.addEventListener('fetch',function(event) {
-  event.respondWith
-  (    
-    caches.match(event.request)
-    .then(function(response) {
-        if (response !== undefined) return; 
-      	fetch(event.request)
-      	.then(function (response) {
-       		let cloneResponse = response.clone();
-            caches.open(staticCacheName)
-            .then(function (cache) {
-                cache.put(event.request, cloneResponse);
-              });
-            return response;
-      	});
-    }) 
-  );
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request).then(function(response) {
+            return response || fetch(event.request);
+        })
+    );
 });

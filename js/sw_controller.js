@@ -1,12 +1,11 @@
 /*Adding service Worker*/
 
 if ('serviceWorker' in navigator) {
-  //We use Promise here to make the work better
-  navigator.serviceWorker
-  .then(function(){
-  	console.log('Service worker is Registered');
-  })
-  .catch(function(error){
-    console.error('Error: '+ error);
-  })
+	navigator.serviceWorker.register('./sw.js')
+	.then(function() {
+		console.log('ServiceWorker registration successful with scope: ', registration.scope);
+	})
+	.catch(function(err) {
+		console.log('ServiceWorker registration failed: ', err);
+	});
 };
