@@ -18,9 +18,9 @@ To download this repository,
 
 ### How to use downloaded/cloned Repo
 
-```
+### Please Note
 Ensure you have [Sublime Text](https://www.sublimetext.com/3) or [Visual studio code](https://code.visualstudio.com/) so you can do good editing and reading of files if you use a windows OS. Get [Atom](https://atom.io/) if you use IOS.
-```
+
 
 * **index.html** is the HTML file contains the home view displays.
 * **restaurant.html** is the HTML file displays a selected resturant from the home page.
