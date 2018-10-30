@@ -47,18 +47,25 @@ self.addEventListener('activate', function(event) {
 
 //Fetch Cache
 self.addEventListener('fetch', function(event) {
-  var requestUrl = new URL(event.request.url);
-
-  if (requestUrl.origin === location.origin) {
-    if (requestUrl.pathname === '/') {
-      event.respondWith(caches.match('/'));
-      return;
-    }
-  }
-
   event.respondWith(
     caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+      if (response) {
+      	return response;
+      }
+      else{
+      	return fetch(event.request)
+      	.then(function(response){
+      		let respClone = response.clone();
+      		catches.open(staticCacheName)
+      		.then(function(cache){
+      			cache.put(event.request, respClone);
+      		})
+      		return response;
+      	})
+      	.catch(function(error){
+      		console.log(error);
+      	})
+      }
     })
   );
 });
